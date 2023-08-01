@@ -1,19 +1,18 @@
-import 'package:example/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 
-class CreaditCardInputForm extends StatefulWidget {
-  const CreaditCardInputForm({Key? key, required this.creditCardCallBack}) : super(key: key);
+class CustomCreditCardForm extends StatefulWidget {
+  const CustomCreditCardForm({Key? key, required this.creditCardCallBack}) : super(key: key);
   final void Function(CreditCardModel) creditCardCallBack;
 
   @override
-  State<CreaditCardInputForm> createState() => _CreaditCardInputFormState();
+  State<CustomCreditCardForm> createState() => _CustomCreditCardFormState();
 }
 
-class _CreaditCardInputFormState extends State<CreaditCardInputForm> {
+class _CustomCreditCardFormState extends State<CustomCreditCardForm> {
   String cardNumber = '';
   String expiryDate = '';
   String cardHolderName = '';
@@ -46,7 +45,7 @@ class _CreaditCardInputFormState extends State<CreaditCardInputForm> {
           obscureCardNumber: true,
           obscureCardCvv: true,
           isHolderNameVisible: true,
-          cardBgColor: AppColors.cardBgColor,
+          cardBgColor: const Color(0xff363636),
           backgroundImage: 'assets/card_image.png',
           isSwipeGestureEnabled: true,
           onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},

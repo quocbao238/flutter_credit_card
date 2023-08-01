@@ -1,4 +1,3 @@
-import 'package:example/credit_card_input_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
@@ -19,7 +18,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: const Color(0xFF5F2EEA),
         title: const Text('Custom Credit Card Input Form'),
       ),
-      body: CreaditCardInputForm(creditCardCallBack: (CreditCardModel creditCardModel) {
+      body: CustomCreditCardForm(creditCardCallBack: (CreditCardModel creditCardModel) {
         //show toast or snackbar
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
