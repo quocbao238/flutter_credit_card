@@ -242,7 +242,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
           Visibility(
             visible: widget.isHolderNameVisible,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
               margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
               child: TextFormField(
                 key: widget.cardHolderKey,
@@ -280,8 +280,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
           Visibility(
             visible: widget.isCardNumberVisible,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              margin: const EdgeInsets.only(left: 16, top: 16, right: 16),
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
               child: TextFormField(
                 key: widget.cardNumberKey,
                 obscureText: showCardNumber,
@@ -326,7 +326,7 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 child: Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                    margin: const EdgeInsets.only(left: 16, top: 0, right: 16),
                     child: TextFormField(
                       key: widget.expiryDateKey,
                       controller: _expiryDateController,
@@ -375,8 +375,8 @@ class _CreditCardFormState extends State<CreditCardForm> {
                 child: Visibility(
                   visible: widget.enableCvv,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    margin: const EdgeInsets.only(left: 16, top: 8, right: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    margin: const EdgeInsets.only(left: 16, top: 0, right: 16),
                     child: TextFormField(
                       key: widget.cvvCodeKey,
                       obscureText: widget.obscureCvv,

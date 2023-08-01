@@ -317,15 +317,6 @@ class _CreditCardWidgetState extends State<CreditCardWidget> with SingleTickerPr
   /// Card number, Exp. year and Card holder name
   ///
   Widget _buildFrontContainer() {
-    final TextStyle defaultTextStyle = Theme.of(context).textTheme.titleLarge!.merge(
-          const TextStyle(
-            color: Colors.white,
-            fontFamily: 'halter',
-            fontSize: 15,
-            package: 'flutter_credit_card',
-          ),
-        );
-
     String number = widget.cardNumber;
     if (widget.obscureCardNumber) {
       final String stripped = number.replaceAll(RegExp(r'[^\d]'), '');
@@ -346,94 +337,90 @@ class _CreditCardWidgetState extends State<CreditCardWidget> with SingleTickerPr
       width: widget.width,
       padding: widget.padding,
       border: widget.frontCardBorder,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          if (widget.bankName.isNotNullAndNotEmpty)
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16, top: 16),
-                child: Text(
-                  widget.bankName!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: defaultTextStyle,
-                ),
-              ),
-            ),
-          Expanded(
-            flex: widget.isChipVisible ? 1 : 0,
-            child: Row(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 33, left: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 if (widget.isChipVisible)
                   Padding(
                     padding: const EdgeInsets.only(left: 16),
-                    child: Image.asset(
-                      'icons/chip.png',
-                      package: 'flutter_credit_card',
-                      color: widget.chipColor,
-                      scale: 1,
-                    ),
+                    child: Image.asset('icons/chip.png', package: 'flutter_credit_card', color: widget.chipColor, scale: 1),
                   ),
               ],
             ),
-          ),
-          const SizedBox(height: 10),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, top: 24.0),
               child: Text(
                 widget.cardNumber.isEmpty ? 'XXXX XXXX XXXX XXXX' : number,
-                style: widget.textStyle ?? defaultTextStyle,
+                style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w700),
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, top: 4.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text('Valid:',
+                        style: TextStyle(
+                          fontFamily: 'SF Pro Display',
+                          color: Colors.white,
+                          fontSize: 12,
+                        )),
+                    const SizedBox(width: 5),
+                    Text(widget.expiryDate.isEmpty ? widget.labelExpiredDate : widget.expiryDate,
+                        style: const TextStyle(
+                          fontFamily: 'SF Pro Display',
+                          color: Colors.white,
+                          fontSize: 12,
+                        )),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  Text(
-                    widget.labelValidThru,
-                    style: widget.textStyle ?? defaultTextStyle.copyWith(fontSize: 7),
-                    textAlign: TextAlign.center,
+                  Visibility(
+                    visible: widget.isHolderNameVisible,
+                    child: Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(widget.cardHolderName.isEmpty ? widget.labelCardHolder : widget.cardHolderName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold, color: Colors.white)),
+                          Container(
+                            margin: const EdgeInsets.only(top: 8.0),
+                            width: MediaQuery.sizeOf(context).width * 0.2,
+                            height: 4,
+                            color: const Color(0xFFEEEDFF),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 8.0),
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            height: 4,
+                            color: const Color(0xFFEEEDFF),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                  const SizedBox(width: 5),
-                  Text(
-                    widget.expiryDate.isEmpty ? widget.labelExpiredDate : widget.expiryDate,
-                    style: widget.textStyle ?? defaultTextStyle,
-                  ),
+                  widget.cardType != null ? getCardTypeImage(widget.cardType) : getCardTypeIcon(widget.cardNumber),
                 ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Visibility(
-                  visible: widget.isHolderNameVisible,
-                  child: Expanded(
-                    child: Text(
-                      widget.cardHolderName.isEmpty ? widget.labelCardHolder : widget.cardHolderName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: widget.textStyle ?? defaultTextStyle,
-                    ),
-                  ),
-                ),
-                widget.cardType != null ? getCardTypeImage(widget.cardType) : getCardTypeIcon(widget.cardNumber),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

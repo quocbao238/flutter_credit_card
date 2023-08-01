@@ -17,9 +17,23 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF5F2EEA),
-        title: const Text('Customized Card Input Form'),
+        title: const Text('Custom Credit Card Input Form'),
       ),
-      body: CreaditCardInputForm(creditCardCallBack: (CreditCardModel creditCardModel) => print(creditCardModel.toString())),
+      body: CreaditCardInputForm(creditCardCallBack: (CreditCardModel creditCardModel) {
+        //show toast or snackbar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Card Number: ${creditCardModel.cardNumber}\n'
+              'Expiry Date: ${creditCardModel.expiryDate}\n'
+              'Card Holder Name: ${creditCardModel.cardHolderName}\n'
+              'CVV Code: ${creditCardModel.cvvCode}',
+              style: const TextStyle(fontSize: 18),
+            ),
+            duration: const Duration(milliseconds: 5000),
+          ),
+        );
+      }),
     );
   }
 }
